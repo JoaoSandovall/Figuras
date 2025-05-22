@@ -1,13 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-// Classe abstrata base para todas as formas geométricas
 abstract class FormaGeometrica {
     public abstract double getArea();
     public abstract double getPerimetro();
 }
 
-// Classe Triângulo
 class Triangulo extends FormaGeometrica {
     private double lado1;
     private double lado2;
@@ -15,14 +13,12 @@ class Triangulo extends FormaGeometrica {
     private double base;
     private double altura;
 
-    // Construtor para triângulo equilátero
     public Triangulo(double lado) {
         this.lado1 = this.lado2 = this.lado3 = lado;
         this.altura = (lado * Math.sqrt(3)) / 2;
         this.base = lado;
     }
 
-    // Construtor para triângulo isósceles
     public Triangulo(double ladosIguais, double base) {
         this.lado1 = this.lado2 = ladosIguais;
         this.lado3 = base;
@@ -30,7 +26,6 @@ class Triangulo extends FormaGeometrica {
         this.altura = Math.sqrt(Math.pow(ladosIguais, 2) - Math.pow(base/2, 2));
     }
 
-    // Construtor para triângulo escaleno
     public Triangulo(double lado1, double lado2, double lado3) {
         this.lado1 = lado1;
         this.lado2 = lado2;
@@ -52,7 +47,6 @@ class Triangulo extends FormaGeometrica {
     }
 }
 
-// Classe Retângulo
 class Retangulo extends FormaGeometrica {
     private double comprimento;
     private double largura;
@@ -62,7 +56,6 @@ class Retangulo extends FormaGeometrica {
         this.largura = largura;
     }
 
-    // Construtor para quadrado (sobrecarga)
     public Retangulo(double lado) {
         this.comprimento = lado;
         this.largura = lado;
@@ -79,7 +72,6 @@ class Retangulo extends FormaGeometrica {
     }
 }
 
-// Classe Circunferência
 class Circunferencia extends FormaGeometrica {
     private double raio;
 
@@ -97,20 +89,17 @@ class Circunferencia extends FormaGeometrica {
         return 2 * Math.PI * raio;
     }
 
-    // Método específico para circunferência (diâmetro)
     public double getDiametro() {
         return 2 * raio;
     }
 }
 
-// Classe Pentágono
 class Pentagono extends FormaGeometrica {
     private double lado;
     private double apotema;
 
     public Pentagono(double lado) {
         this.lado = lado;
-        // Fórmula aproximada para o apótema de um pentágono regular
         this.apotema = lado / (2 * Math.tan(Math.PI / 5));
     }
 
@@ -130,10 +119,8 @@ class Pentagono extends FormaGeometrica {
     }
 }
 
-// Classe principal
 public class Main {
     public static void main(String[] args) {
-        // Criando uma lista de formas geométricas
         List<FormaGeometrica> formas = new ArrayList<>();
         
         formas.add(new Triangulo(5, 6, 7));
@@ -143,7 +130,6 @@ public class Main {
         formas.add(new Circunferencia(3));
         formas.add(new Pentagono(5));
         
-        // Mostrando áreas e perímetros de todas as formas
         System.out.println("Áreas e perímetros das formas:");
         for (FormaGeometrica forma : formas) {
             System.out.println(forma.getClass().getSimpleName() + ":");
@@ -152,7 +138,6 @@ public class Main {
             System.out.println();
         }
         
-        // Filtrando apenas circunferências para mostrar raios e diâmetros
         List<Circunferencia> circunferencias = new ArrayList<>();
         for (FormaGeometrica forma : formas) {
             if (forma instanceof Circunferencia) {
@@ -163,7 +148,6 @@ public class Main {
         mostrarRaiosEDiametros(circunferencias);
     }
     
-    // Função que recebe apenas circunferências (polimorfismo)
     public static void mostrarRaiosEDiametros(List<Circunferencia> circunferencias) {
         System.out.println("\nRaios e diâmetros das circunferências:");
         for (Circunferencia circ : circunferencias) {
